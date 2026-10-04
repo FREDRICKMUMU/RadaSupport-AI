@@ -1,6 +1,5 @@
 import { ArrowRight, Send, User } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
 import { ParticleBackground } from "@/components/particle-background";
 
 const Hero = () => {
@@ -28,13 +27,13 @@ const Hero = () => {
         </p>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-20">
-          <Link
-            href="/sign-in"
+          <a
+            href="/api/auth"
             className="h-11 px-8 cursor-pointer rounded-full bg-white text-black text-sm font-medium hover:bg-zinc-200 transition-all flex items-center gap-2"
           >
             Start for free
             <ArrowRight className="w-4 h-4" />
-          </Link>
+          </a>
           <button
             type="button"
             className="h-11 px-8 rounded-full border border-zinc-800 text-zinc-300 text-sm font-medium hover:border-zinc-600 hover:text-white transition-all bg-black/20 backdrop-blur-sm"
@@ -50,6 +49,7 @@ const Hero = () => {
 
         <div className="rounded-2xl p-1 md:p-2 relative overflow-hidden ring-1 ring-white/10 bg-[#0a0a0e] shadow-2xl animate-float">
           <div className="flex flex-col h-125 md:h-150 w-full bg-[#0a0a0e] rounded-xl overflow-hidden">
+
             <div className="h-14 border-b border-white/5 flex items-center px-6 bg-[#0e0e12] shrink-0">
               <div className="flex items-center gap-2">
                 <span
@@ -115,29 +115,27 @@ const Hero = () => {
                     />
                   </div>
                   <div className="p-4 rounded-2xl text-sm leading-relaxed shadow-sm bg-zinc-800 text-zinc-200 rounded-tl-sm">
-                   RadaSupport answers customer questions using your own website content, so your visitors get help instantly, day or night.
+                    RadaSupport answers customer questions using your own website content, so your visitors get help instantly, day or night.
                   </div>
                 </div>
-
-           
               </div>
-              
 
             </div>
-          </div>
-               <div className="p-4 bg-[#oAoAoE] border-white/5 shrink-0">
-                    <div className="relative">
-                      <div className="min-h-12.5 w-full px-4 py-3 text-sm bg-zinc-900/50 border border-white/10 rounded-xl text-zinc-500 flex items-center justify-between">
-                        <span>Type a message...</span>
-                        <button className="h-8 w-8 rounded-lg bg-zinc-800 flex items-center justify-center text-zinc-500 cursor-default">
-                          <Send className="w-4 h-4" />
-                        </button>
-                      </div>
-                    </div>
-                </div>
-        </div>
 
-        
+            {/* Message input — now correctly docked inside the chat window */}
+            <div className="p-4 bg-[#0a0a0e] border-t border-white/5 shrink-0">
+              <div className="relative">
+                <div className="min-h-12.5 w-full px-4 py-3 text-sm bg-zinc-900/50 border border-white/10 rounded-xl text-zinc-500 flex items-center justify-between">
+                  <span>Type a message...</span>
+                  <button className="h-8 w-8 rounded-lg bg-zinc-800 flex items-center justify-center text-zinc-500 cursor-default">
+                    <Send className="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
       </div>
     </section>
   );

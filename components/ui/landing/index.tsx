@@ -1,38 +1,66 @@
+import { isAuthorized } from "@/lib/isAuthorized";
 import Link from "next/link";
-import React from 'react'
+import React from "react";
 
-const Navbar = () => {
+
+const Navbar = async () => {
+  const user = await isAuthorized();
+
   return (
-    <nav className='fixed top-0 inset-x-0 z-50 transitional-all duration-300 backdrop-blur-sm border-b border-white//5 bg-[#050509]/50 '>
-        <div className='max-w-6xl mx-auto px-6 h-16 flex items-center justify-between'>
-        <Link href={"/"} className='flex items-center gap-2'>
-        <div className='w-5 h-5 bg-white rounded-sm flex items-center justify-center'>
-            <div className='w-2.5 h-2.5 bg-black rounded-[1px]'></div>
-        </div>
-        <span className='text-base font-semibold font-inter tracking-tight text-white/90'>
+    <nav className="fixed top-0 inset-x-0 z-50 transition-all duration-300 backdrop-blur-sm border-b border-white/5 bg-[#050509]/50">
+      <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+        <Link href="/" className="flex items-center gap-2">
+          <div className="w-5 h-5 bg-white rounded-sm flex items-center justify-center">
+            <div className="w-2.5 h-2.5 bg-black rounded-[1px]" />
+          </div>
+          <span className="text-base font-semibold font-sans tracking-tight text-white/90">
             RadaSupport AI
-        </span>
+          </span>
         </Link>
 
-            <div className='hidden md:flex items-center gap-8 text-sm font-light text-zinc-400'>
-                <Link href='#features' className='hover:text-white transition-colors'>Features</Link>
-                <Link href='#how-it-works' className='hover:text-white transition-colors'>Intergration</Link>
-                <Link href='#pricing' className='hover:text-white transition-colors'>Pricing</Link>
-            </div>
-
-            <div className='flex items-center gap-4'>
-                <Link 
-                className='text-xs font-medium text-zinc-400 hover:text-white transition-colors'
-                href='/api/auth'>Sign In</Link>
-                <Link
-                href='/api/auth'
-                className='text-xs font-medium bg-white text-black px-4 py-2 rounded-full hover:bg-zinc-200 transition-colors'
-                >Get Started</Link>
-            </div>
-
+        <div className="hidden md:flex items-center gap-8 text-sm font-light text-zinc-400">
+          <a href="#features" className="hover:text-white transition-colors">
+            Features
+          </a>
+          <a href="#how-it-works" className="hover:text-white transition-colors">
+            Integration
+          </a>
+          <a href="#pricing" className="hover:text-white transition-colors">
+            Pricing
+          </a>
         </div>
+
+        <div className="flex items-center gap-4">
+          {
+            user ? (
+              <div className='flex items-center gap-3'>
+                <Link href="/dashboard" className="h-10 px-4 rounded-xl bg-white text-black text-sm font-medium hover:bg-zinc-200 transition-all flex items-center gap-2">
+                Dashboard
+                </Link>
+
+              </div>
+          ) : (
+
+            <>
+               <a
+            href="/api/auth"
+            className="text-xs font-medium text-zinc-400 hover:text-white transition-colors"
+          >
+            Sign In
+          </a>
+          <a
+            href="/api/auth"
+            className="text-xs font-medium bg-white text-black px-4 py-2 rounded-full hover:bg-zinc-200 transition-colors"
+          >
+            Get Started
+          </a>
+            </>
+          )}
+       
+        </div>
+      </div>
     </nav>
-  )
-}
+  );
+};
 
 export default Navbar;
