@@ -15,6 +15,13 @@
       "when": 1790943291669,
       "tag": "0001_unique_supernaut",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1791205411376,
+      "tag": "0002_heavy_molecule_man",
+      "breakpoints": true
     }
   ]
 }
