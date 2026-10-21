@@ -148,7 +148,7 @@ const InitialForm = () => {
     };
 
     return (
-        <div className='w-full max-w-xl mx-auto min-h-[400px] flex flex-col justify-center'>
+        <div className='w-full max-w-xl mx-auto min-h-100 flex flex-col justify-center'>
             <div className='fixed top-0 left-0 w-full h-1 bg-white/5'>
                 <div
                     className='h-full bg-indigo-500 transition-all duration-500 ease-out'
