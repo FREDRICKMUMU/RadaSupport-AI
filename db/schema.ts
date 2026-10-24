@@ -39,15 +39,28 @@ export const knowledge_source = pgTable("knowlwdge_source", {
 
 export const sections = pgTable("sections", {
   id: text("id")
-  .primaryKey()
-  .default(sql`gen_random_uuid`),
-  user_email:text("user_email").notNull(),
-  name:text("name").notNull(),
-  description:text("description").notNull(),
+    .primaryKey()
+    .default(sql`gen_random_uuid()`),
+  user_email: text("user_email").notNull(),
+  name: text("name").notNull(),
+  description: text("description").notNull(),
   source_ids: text("source_ids").array().notNull(),
   tone: text("tone").notNull(),
   allowed_topics: text("allowed_topics"),
   blocked_topics: text("blocked_topics"),
   status: text("status").notNull().default("active"),
   created_at: text("created_at").default(sql`now()`),
-})
+});
+
+
+export const chatBotMetadata = pgTable("chatBotMetadata", {
+  id: text("id")
+    .primaryKey()
+    .default(sql`gen_random_uuid()`),
+  user_email: text("user_email").notNull(),
+  color: text("color").default("#4f39f6"),
+  welcome_message: text("welcome_message").default(
+    "Hi there, How can I help you today?"
+  ),
+  created_at: text("created_at").default(sql`now()`),
+});

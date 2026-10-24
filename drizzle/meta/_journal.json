@@ -36,6 +36,20 @@
       "when": 1792591902803,
       "tag": "0004_chunky_frog_thor",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1792833275255,
+      "tag": "0005_polite_mandarin",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1792835022115,
+      "tag": "0006_bored_the_leader",
+      "breakpoints": true
     }
   ]
 }

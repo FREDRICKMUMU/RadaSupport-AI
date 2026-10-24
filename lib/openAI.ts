@@ -75,3 +75,25 @@ console.error("Error in summarizeConversation:", error);
 throw error;
 }
 }
+
+export async function summarizeConversatio(messages: any[]) {
+  try {
+    const completion = await openai.chat.completions.create({
+      model: "gpt-4o-mini",
+      temperature: 0.3,
+      max_tokens: 500,
+      messages: [
+        {
+          role: "system",
+          content: "Summarize the following conversation history into concise paragraph, preserving key details and user intent. The final output MUST be under 200 words.",
+        },
+        ...messages
+      ]
+    });
+
+    return completion.choices[0].message.content?.trim() ?? "";
+  } catch (error) {
+    console.error("Error in summarizeConversation:", error);
+    throw error;
+  }
+}
