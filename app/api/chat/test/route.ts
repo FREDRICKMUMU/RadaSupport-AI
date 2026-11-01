@@ -19,20 +19,25 @@ const countConversationTokens = (
 const summarizeConversation = async (
   messages: { role: "user" | "assistant"; content: string }[]
 ) => {
+  const transcript = messages
+    .map((m) => `${m.role === "user" ? "Customer" : "Agent"}: ${m.content}`)
+    .join("\n");
+
   const completion = await openai.chat.completions.create({
     model: MODEL,
     messages: [
       {
         role: "system",
         content:
-          "Summarize this conversation briefly, preserving relevant facts and requests.",
+          "Summarize this support conversation in under 150 words. Keep the customer's problem, key facts (names, order numbers, products), and anything already answered or promised.",
       },
-      ...messages,
+      { role: "user", content: transcript },
     ],
+    temperature: 0.1,
     max_tokens: 300,
   });
 
-  return completion.choices[0]?.message?.content ?? "";
+  return completion.choices[0]?.message?.content?.trim() ?? "";
 };
 
 const AGENT_NAME = "Mwende";
