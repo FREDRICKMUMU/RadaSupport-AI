@@ -1,5 +1,6 @@
 'use client';
 
+import DashboardOverview from '@/components/dashboard/dashboardOverview';
 import InitialForm from '@/components/dashboard/initialform'
 import React, { useEffect, useState } from 'react'
 
@@ -25,15 +26,15 @@ const Page = () => {
     }
 
     return(
-        <div className='flex-1 flex w-full'>
+        <div className='flex-1  w-full'>
            {!isMetaDataAvailable ? (
             
-        <div className='w-full flex items-center justify-center p-4 min-h-[400px]'>
+        <div className='w-full flex items-center justify-center p-4  min-height: 400px'>
             <InitialForm />
         </div>
            ): (
-            <>
-            </>
+            <DashboardOverview />
+            
            )} 
         </div>
     )
