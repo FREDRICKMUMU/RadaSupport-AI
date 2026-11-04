@@ -9,10 +9,8 @@
       return;
     }
 
-    // Use whatever domain this script was loaded from (localhost, ngrok or production)
     var origin = new URL(script.src).origin;
 
-    // Don't load twice
     if (document.getElementById("radasupport-widget-frame")) return;
 
     fetch(origin + "/api/widget/session", {
@@ -51,7 +49,6 @@
         document.body.appendChild(iframe);
 
         window.addEventListener("message", function (event) {
-          // Only accept resize messages from our own iframe
           if (event.source !== iframe.contentWindow) return;
 
           if (event.data && event.data.type === "resize") {

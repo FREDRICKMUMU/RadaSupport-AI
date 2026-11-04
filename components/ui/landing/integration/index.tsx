@@ -67,7 +67,7 @@ No SDK, no syncing headaches. Add one script tag and you're live, with styling t
                         <div className='pl-4'>
                             <span className='text-indigo-400'>src</span>
                             <span className='text-emerald-400'>
-                                &quot;https://RadaSupport.com/init.js&quot;
+                                &quot;https://rada-support-ai.vercel.app/widget.js&quot;
                                 </span>
                         </div>
 

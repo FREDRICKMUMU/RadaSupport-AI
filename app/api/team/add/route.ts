@@ -12,9 +12,9 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const organizationId = (loggedInUser as any).organizationId as
-      | string
-      | undefined;
+    const organizationId = (loggedInUser.organization_id ??
+      loggedInUser.organizationId) as string | undefined;
+
     if (!organizationId) {
       return NextResponse.json(
         { error: "Your account has no organization" },
@@ -67,7 +67,13 @@ export async function POST(req: Request) {
       organization_id: organizationId,
     });
 
-    return NextResponse.json({ user: createdUser });
+    const safeUser = JSON.parse(
+      JSON.stringify(createdUser, (key, value) =>
+        typeof value === "bigint" ? value.toString() : value
+      )
+    );
+
+    return NextResponse.json({ user: safeUser });
   } catch (error) {
     console.error("Failed to add team member:", error);
     return NextResponse.json(

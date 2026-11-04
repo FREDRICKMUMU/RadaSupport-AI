@@ -5,7 +5,6 @@ import { AlertCircle, Check, Code, Copy } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 
-// Set NEXT_PUBLIC_APP_URL in .env.local / Vercel to your real domain.
 const APP_URL =
   process.env.NEXT_PUBLIC_APP_URL ?? 'https://rada-support-ai.vercel.app'
 
@@ -15,12 +14,11 @@ const EmbedCodeConfig = ({ chatbotId }: { chatbotId: string | undefined }) => {
   const snippet = `<script src="${APP_URL}/widget.js"\n  data-id="${chatbotId || '...'}"\n  defer>\n</script>`
 
   const handleCopyCode = () => {
-  setCopied(true);
-  navigator.clipboard.writeText(
-    `<script src="http://localhost:3000/widget.js" data-id="${chatbotId}"></script>`
-  );
-  setTimeout(() => setCopied(false), 2000);
-};
+    if (!chatbotId) return
+    navigator.clipboard.writeText(snippet)
+    setCopied(true)
+    setTimeout(() => setCopied(false), 2000)
+  }
 
   return (
     <Card className="border-white/5 bg-[#0a0a0e]">
@@ -36,9 +34,9 @@ const EmbedCodeConfig = ({ chatbotId }: { chatbotId: string | undefined }) => {
       <CardContent className="space-y-4">
         <div className="relative group">
           <div className="bg-[#050509] border border-white/10 rounded-lg p-3 overflow-hidden">
-<code className="text-[10px] text-zinc-400 font-mono block overflow-x-auto whitespace-pre">
-  {`<script src="http://localhost:3000/widget.js" \n  data-id="${chatbotId || "..."}" \n  defer>\n</script>`}
-</code>
+            <code className="text-[10px] text-zinc-400 font-mono block overflow-x-auto whitespace-pre">
+              {snippet}
+            </code>
           </div>
 
           <Button
