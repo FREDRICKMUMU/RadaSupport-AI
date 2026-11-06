@@ -26,7 +26,7 @@ export async function GET() {
       secure: process.env.NODE_ENV === "production",
       sameSite: "lax",
       path: "/",
-      maxAge: 60 * 10, // 10 minutes — plenty for a login round-trip
+      maxAge: 60 * 10, 
     });
     return response;
   } catch (error) {

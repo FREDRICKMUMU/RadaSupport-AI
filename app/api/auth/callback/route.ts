@@ -30,8 +30,6 @@ export async function GET(req: NextRequest) {
   }
 
   if (!code) {
-    // No one should land here directly — send them back to the start instead
-    // of showing a bare error (e.g. a stray refresh or bookmarked callback URL).
     return NextResponse.redirect(new URL("/", req.url));
   }
 
@@ -50,10 +48,9 @@ export async function GET(req: NextRequest) {
 
     const claims = await scalekit.validateToken(idToken);
 
-    // Debug log — remove once you've confirmed what ScaleKit actually sends back.
     console.log("ID token claims:", JSON.stringify(claims, null, 2));
 
-    // ScaleKit sends the organization id under "oid".
+   
     const organisationId = (claims as any).oid || null;
 
     if (!organisationId) {
@@ -86,7 +83,7 @@ export async function GET(req: NextRequest) {
       secure: process.env.NODE_ENV === "production",
       sameSite: "lax",
       path: "/",
-      maxAge: 60 * 60 * 24 * 7, // 1 week
+      maxAge: 60 * 60 * 24 * 7,
     });
 
     return response;
